@@ -6,7 +6,7 @@
     <meta name="google" content="notranslate">
     <title>Unity Web Player | Gacha</title>
     <style>
-      /* 画面の余白を消し、背景を黒にしてゲームを真ん中に寄せる設定 */
+      /* 画面全体の余白をなくし、背景を黒にする */
       html, body {
         margin: 0;
         padding: 0;
@@ -18,13 +18,19 @@
         align-items: center;
         overflow: hidden;
       }
+      /* 👈 ここが重要：画面に合わせてゲーム枠を綺麗に自動リサイズする設定 */
       #unity-canvas {
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.5); /* 枠線に少し影をつけて見やすく */
+        width: 100vw !important;
+        height: 56.25vw !important; /* 16:9 の比率を維持する計算 */
+        max-width: 177.78vh !important;
+        max-height: 100vh !important;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
       }
     </style>
   </head>
   <body>
-    <canvas id="unity-canvas" width=1920 height=1080 tabindex="-1" style="width: 1920px; height: 1080px; background: #231F20"></canvas>
+    <!-- 本体の固定サイズ指定をCSSで上書きできるように修正 -->
+    <canvas id="unity-canvas" width="1920" height="1080" tabindex="-1" style="background: #231F20"></canvas>
     <script src="Build/kadai.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -48,6 +54,7 @@
         companyName: "DefaultCompany",
         productName: "Gacha",
         productVersion: "1.0",
+        // 自動リサイズと高DPIバグを確実に防止
         matchWebGLToCanvasSize: false, 
         devicePixelRatio: 1, 
       }).then((unityInstance) => {
