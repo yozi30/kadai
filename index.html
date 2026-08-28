@@ -31,12 +31,13 @@
         frameworkUrl: "Build/kadai.framework.js.unityweb",
         codeUrl: "Build/kadai.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
+                companyName: "DefaultCompany",
         productName: "Gacha",
         productVersion: "1.0",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+        matchWebGLToCanvasSize: false, 
+        devicePixelRatio: 1, 
       }).then((unityInstance) => {
+
       }).catch((message) => {
         alert(message);
       });
